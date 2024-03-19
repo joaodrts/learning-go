@@ -19,25 +19,17 @@ type Product struct {
 	Value float64
 }
 
-func CratePerson(persons []Person) {
-
-	list := make([]Person, len(persons))
-
-	for i := 0; i < len(persons); i++ {
-		list[i] = persons[i]
-	}
-
-	fmt.Println(list)
-	fmt.Println("Tamanho do array: ", len(list))
-}
-
 func CreateSale(person Person, products []Product) {
 
-	var sale Sale = Sale{id: 1, client: person, products: products, value: sumProduct(products)}
+	// or if result := validationsForSale(person, products); result == true {
+	if validationsForSale(person, products) {
 
-	fmt.Println("Client: ", sale.client.Name)
-	fmt.Println("Products: ", sale.products)
-	fmt.Println("Sale Value: ", sale.value)
+		var sale Sale = Sale{id: 1, client: person, products: products, value: sumProduct(products)}
+
+		fmt.Println("Client: ", sale.client.Name)
+		fmt.Println("Products: ", sale.products)
+		fmt.Println("Sale Value: ", sale.value)
+	}
 
 }
 
@@ -46,9 +38,22 @@ func sumProduct(products []Product) float64 {
 	var valueProducts float64
 
 	for i := 0; i < len(products); i++ {
-		valueProducts = valueProducts + products[i].Value
+		valueProducts += products[i].Value
 	}
 
 	return valueProducts
 
+}
+
+func validationsForSale(person Person, products []Product) bool {
+
+	if person.Name == "" || person.Age == 0 {
+		fmt.Println("Report a customer.")
+		return false
+	} else if len(products) == 0 {
+		fmt.Println("inform at least one product")
+		return false
+	}
+
+	return true
 }
