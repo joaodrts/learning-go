@@ -1,7 +1,8 @@
 package main
 
 import (
-	f "functionslearning"
+	"fmt"
+	f "learning-go/functions"
 )
 
 func main() {
@@ -17,4 +18,30 @@ func main() {
 	}
 
 	f.CreateSale(person, products)
+
+	fmt.Println("Inicio do CRUD...")
+
+	fmt.Println("Inicio do CRUD - GetAll...")
+
+	result := f.GelAll()
+	fmt.Println(result)
+
+	fmt.Println("Inicio do Add...")
+	f.Add(f.Client{Fullname: "Joao", Age: 21})
+	f.Add(f.Client{Fullname: "Joao G", Age: 21})
+
+	fmt.Println("Inicio do GetAll...")
+	resultGetAll := f.GelAll()
+	fmt.Println(resultGetAll)
+
+	fmt.Println("Inicio do GetById...")
+	resultGetById := f.GetById(1)
+	fmt.Println(resultGetById)
+
+	fmt.Println("Inicio do Delete...")
+	f.Delete(1)
+	resultGetAll2 := f.GelAll()
+
+	fmt.Println(resultGetAll2)
+
 }
